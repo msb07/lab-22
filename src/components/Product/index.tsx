@@ -1,5 +1,5 @@
-import Incrementor from "../Incrementor";
-import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";
+import Incrementor from '../Incrementor';
+import { Wrapper, Info, Column, Text, WrapperIncrementor } from './styles';
 
 export type ProductProps = {
   id: number;
