@@ -32,7 +32,6 @@ export const useCart = create<CartProducts>((set) => ({
     set(({ cart }) => {
       const isProductInCart = cart.find((item) => item.id === product.id);
       if (isProductInCart) {
-        //Se estiver, soma a quantidade
         return {
           cart: cart.map((item) =>
             item.id === product.id && item.amount > 0
@@ -42,7 +41,7 @@ export const useCart = create<CartProducts>((set) => ({
         };
       }
       return {
-        cart: [...cart, { ...product, amount: 0 }],
+        cart: [...cart],
       };
     });
   },

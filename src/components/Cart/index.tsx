@@ -39,9 +39,13 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         </Typography>
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
-      {cart?.map((product) => (
-        <Product key={product.id} product={product} />
-      ))}
+      {cart?.map((product) =>
+        product.amount === 0 ? (
+          <></>
+        ) : (
+          <Product key={product.id} product={product} />
+        )
+      )}
       <Subtotal>
         <Typography level={5} size='large' fontWeight={600}>
           Total
