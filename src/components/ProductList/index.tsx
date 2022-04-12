@@ -4,11 +4,11 @@ export type ProductListProps = {
   data: ProductProps[];
 };
 
-export const ProductList: React.FC<ProductListProps> = ({ data }) => {
+export const ProductList = ({ data }: ProductListProps) => {
   return (
     <>
       {data.map((product) => (
-        <Product key={product.id} {...product} />
+        <Product key={product.id} product={product} />
       ))}
     </>
   );
