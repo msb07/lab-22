@@ -1,3 +1,5 @@
+import { PriceFormatter } from '../../common/PriceFormatter';
+import { useCart } from '../../hooks/useCart';
 import Incrementor from '../Incrementor';
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from './styles';
 
@@ -6,23 +8,50 @@ export type ProductProps = {
   name: string;
   price: number;
   picture: string;
+  quantity: number;
+  amount: number;
 };
 
-const Product = ({ id, name, price, picture }: ProductProps) => (
-  <Wrapper>
-    <img src={picture} alt={`Imagem de referência ${name}`} />
+export type ProductComponentProps = {
+  product: ProductProps;
+};
 
-    <Info>
-      <Column>
-        <Text>{name}</Text>
-        <Text>{price}</Text>
-      </Column>
+const Product = ({ product }: ProductComponentProps) => {
+  const cart = useCart((state) => state.cart);
+  const increaseAmount = useCart((state) => state.IncreaseAmount);
+  const decreaseAmount = useCart((state) => state.decreaseAmount);
 
-      <WrapperIncrementor>
-        <Incrementor id={id} quantity={1} />
-      </WrapperIncrementor>
-    </Info>
-  </Wrapper>
-);
+  const getAmount = (cart: ProductProps[]) => {
+    let amount = 0;
+    cart.forEach((item) => {
+      if (item.id === product.id) {
+        amount = item.amount;
+      }
+    });
+    return amount;
+  };
+  const amount = getAmount(cart);
+
+  return (
+    <Wrapper>
+      <img src={product.picture} alt={`Imagem de referência ${product.name}`} />
+
+      <Info>
+        <Column>
+          <Text>{product.name}</Text>
+          <Text>{PriceFormatter(product.price)}</Text>
+        </Column>
+
+        <WrapperIncrementor>
+          <Incrementor
+            amount={amount}
+            onClickPlus={() => increaseAmount(product)}
+            onClickMinus={() => decreaseAmount(product)}
+          />
+        </WrapperIncrementor>
+      </Info>
+    </Wrapper>
+  );
+};
 
 export default Product;
