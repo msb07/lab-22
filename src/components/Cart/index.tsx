@@ -1,10 +1,13 @@
-import { Dispatch, SetStateAction } from "react";
-import { CloseOutline } from "@styled-icons/evaicons-outline";
+import { Dispatch, SetStateAction } from 'react';
+import { CloseOutline } from '@styled-icons/evaicons-outline';
 
-import Button from "../Button";
-import Typography from "../Typography";
+import Button from '../Button';
+import Typography from '../Typography';
 
-import { Wrapper, Subtotal, Header } from "./styles";
+import { Wrapper, Subtotal, Header } from './styles';
+import { useCart } from '../../hooks/useCart';
+import Product, { ProductProps } from '../Product';
+import { PriceFormatter } from '../../common/PriceFormatter';
 
 export type MenuPaymentProps = {
   isOpen: boolean;
@@ -19,24 +22,36 @@ export type MenuPaymentProps = {
  * - Incrementador
  */
 
-const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => (
-  <Wrapper isOpen={isOpen}>
-    <Header>
-      <Typography level={5} size="large" fontWeight={600}>
-        Produtos no carrinho
-      </Typography>
-      <CloseOutline onClick={() => setIsOpen(false)} />
-    </Header>
+const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
+  const cart = useCart((state) => state.cart);
 
-    <Subtotal>
-      <Typography level={5} size="large" fontWeight={600}>
-        Total
-      </Typography>
-      <Typography>1,600.50</Typography>
-    </Subtotal>
+  const TotalPrice = (products: ProductProps[]) => {
+    return products.reduce(
+      (acc: number, product) => acc + product.amount * product.price,
+      0
+    );
+  };
+  return (
+    <Wrapper isOpen={isOpen}>
+      <Header>
+        <Typography level={5} size='large' fontWeight={600}>
+          Produtos no carrinho
+        </Typography>
+        <CloseOutline onClick={() => setIsOpen(false)} />
+      </Header>
+      {cart?.map((product) => (
+        <Product key={product.id} product={product} />
+      ))}
+      <Subtotal>
+        <Typography level={5} size='large' fontWeight={600}>
+          Total
+        </Typography>
+        <Typography>{PriceFormatter(TotalPrice(cart))}</Typography>
+      </Subtotal>
 
-    <Button fullWidth>Finalizar compra</Button>
-  </Wrapper>
-);
+      <Button fullWidth>Finalizar compra</Button>
+    </Wrapper>
+  );
+};
 
 export default MenuPayment;
