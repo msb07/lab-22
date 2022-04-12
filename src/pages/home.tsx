@@ -1,31 +1,24 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Cart from '../components/Cart';
 import { Container } from '../components/Container';
 import Header from '../components/Header';
-import { ProductProps } from '../components/Product';
 import { ProductList } from '../components/ProductList';
+import { useProductData } from '../hooks/useProductsData';
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<ProductProps[]>([]);
+  const fetchProducts = useProductData((state) => state.fetchProducts);
+  const products = useProductData((state) => state.products);
 
   useEffect(() => {
-    async function getProducts() {
-      const response = await axios.get<ProductProps[]>(
-        'http://localhost:3001/products'
-      );
-      setData(response.data);
-      console.log(response.data);
-    }
-    getProducts();
+    fetchProducts();
   }, []);
 
   return (
     <>
       <Header setIsOpen={setIsOpen} />
       <Container>
-        <ProductList data={data} />
+        {products && <ProductList data={products} />}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
     </>
