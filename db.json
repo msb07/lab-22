@@ -2,10 +2,38 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Mouse G502",
+      "picture": "https://resource.logitechg.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/g502-hero-gallery-1-nb.png?v=1",
       "quantity": 2,
-      "price": 299.50
+      "price": 399.90
+    },
+    {
+      "id": 2,
+      "name": "Mouse G305",
+      "picture": "https://www.logitechstore.com.br/media/catalog/product/cache/1/image/634x545/9df78eab33525d08d6e5fb8d27136e95/v/2/v2.png",
+      "quantity": 3,
+      "price": 369.90
+    },
+    {
+      "id": 3,
+      "name": "Teclado Logitech PRO X",
+      "picture": "https://www.logitechstore.com.br/media/catalog/product/cache/1/image/634x545/9df78eab33525d08d6e5fb8d27136e95/h/i/high_resolution_png-protenkeyless_fob_blueglow.png",
+      "quantity": 6,
+      "price": 799.90
+    },
+    {
+      "id": 4,
+      "name":"Webcam C920",
+      "picture": "https://www.logitechstore.com.br/media/catalog/product/cache/1/image/634x545/9df78eab33525d08d6e5fb8d27136e95/c/9/c920s.png",
+      "quantity": 1,
+      "price": 449.90
+    },
+    {
+      "id": 5,
+      "name": "G PRO x Wirelles",
+      "picture": "https://www.logitechstore.com.br/media/catalog/product/cache/1/image/634x545/9df78eab33525d08d6e5fb8d27136e95/h/e/headset-gamer-sem-fio-pro-x-shroud-wireless.png",
+      "quantity": 5,
+      "price": 1359.90
     }
   ]
 }
